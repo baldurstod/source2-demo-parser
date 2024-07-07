@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html><head>
+</head>
+<body>
+	<script type="module">
+		import { ParseDemo, BinaryReader } from '../dist/index.js';
+		const htmlFile = document.createElement('input');
+		htmlFile.type = 'file';
+		htmlFile.addEventListener('input', event => fileChanged(event));
+		document.body.append(htmlFile);
+
+
+		function fileChanged(event) {
+			for (const file of event.target.files) {
+				loadFile(file);
+			}
+			event.target.value = null;
+		}
+		function loadFile(file) {
+			const reader = new FileReader();
+			reader.onload = event => {
+				loadArrayBuffer(event.target.result);
+			}
+			reader.readAsArrayBuffer(file);
+		}
+
+		function loadArrayBuffer(ab) {
+			const reader = new BinaryReader(ab);
+			//console.log(reader);
+			//loadShader(reader);
+			new ParseDemo(reader);
+		}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+*.dem
+dist/
+node_modules
